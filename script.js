@@ -15,9 +15,15 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let choice = prompt("Let's play rock paper scissors, type your choice!");
-    console.log(choice);
-    return choice;
+    newChoice = choice.toLowerCase();
+    if (newChoice === "rock" || newChoice === "paper" || newChoice === "scissors") {
+        return console.log(newChoice);
+    } 
+    else {
+         alert("I'm sorry you can only choose rock, paper or scissors");
+    }
 }
+
 
 getHumanChoice()
 
