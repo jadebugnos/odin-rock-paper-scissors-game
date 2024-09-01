@@ -16,7 +16,8 @@ function getComputerChoice() {
 function getHumanChoice() {
     let choice = prompt("Let's play rock paper scissors, type your choice!");
     newChoice = choice.toLowerCase();
-    if (newChoice === "rock" || newChoice === "paper" || newChoice === "scissors") {
+    if (newChoice == "rock" || newChoice == "paper" || newChoice == "scissors") {
+        console.log(newChoice);
         return newChoice;
     } 
     else {
@@ -53,6 +54,13 @@ if (sum === "scissors.paper") {
     console.log (message);
     return message;
 }
+
+// switch (sum) {
+//     case "scissors.paper":
+//         message = winner + str1;
+//         break;
+
+// }
 
 playRound(getHumanChoice(), getComputerChoice());
 
