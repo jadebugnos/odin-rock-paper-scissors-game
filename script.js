@@ -25,6 +25,8 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
+    playRound(humanSelection, computerSelection);
+
     function playRound(humanChoice, robotChoice) {
         let sum = humanChoice + "." + robotChoice;
         console.log(sum);
@@ -59,10 +61,13 @@ function playGame() {
             }
             console.log(message);
             console.log(humanScore, computerScore);
-            return message;
         } else {
             alert("You can only pick rock, paper and scissors!");
         }
+    }
+
+    while (humanScore < 5 || computerScore < 5) {
+        playRound(humanSelection, computerSelection);
     }
 }
 
