@@ -60,6 +60,23 @@ function playRound(humanChoice, robotChoice) {
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
+
 console.log(humanScore, computerScore);
 
+
+function playGame(human, cpu) {
+    let victory = "Congratulations! You won the game!";
+    let defeat = "Game over! you lost the game!";
+
+    while (human < 5 || cpu < 5) {
+        playRound(humanSelection, computerSelection);
+    }
+
+    if (human == 5 || cpu == 5) {
+        return victory;
+    } else {
+        return defeat;
+    }
+}
+
+console.log(playGame(humanScore, computerScore));
