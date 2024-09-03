@@ -12,17 +12,18 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let choice = prompt("Let's play rock paper scissors, type your choice!");
-    return choice.toLowerCase();
+    
+    if (!choice) {
+        return choice = "unknown";
+    } else {
+        return choice.toLowerCase();
+    }
 }
 
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-
 function playGame() {
-    let victory = "Congratulations! You won the game!";
-    let defeat = "Game over! you lost the game!";
+    let victory = "Congratulations! You won the game! refresh to restart.";
+    let defeat = "Game over! you lost the game! refresh to restart.";
     let humanScore = 0;
     let computerScore = 0;
 
@@ -66,8 +67,8 @@ function playGame() {
     }
 
     while (humanScore < 5 && computerScore < 5) {
-        getComputerChoice()
-        getHumanChoice()
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
 
         playRound(humanSelection, computerSelection);
     }
