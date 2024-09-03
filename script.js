@@ -1,7 +1,9 @@
 function getComputerChoice() {
-    if (Math.floor((Math.random() * 3) + 1) === 1) {
+    let randomNum = Math.floor((Math.random() * 3) + 1);
+
+    if (randomNum === 1) {
         return "rock";
-    } else if (Math.floor((Math.random() * 3) + 1) === 2) {
+    } else if (randomNum === 2) {
         return "paper";
     } else {
         return "scissors";
@@ -10,8 +12,7 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let choice = prompt("Let's play rock paper scissors, type your choice!");
-    newChoice = choice.toLowerCase();
-    return newChoice;
+    return choice.toLowerCase();
 }
 
 
@@ -24,8 +25,6 @@ function playGame() {
     let defeat = "Game over! you lost the game!";
     let humanScore = 0;
     let computerScore = 0;
-
-    playRound(humanSelection, computerSelection);
 
     function playRound(humanChoice, robotChoice) {
         let sum = humanChoice + "." + robotChoice;
@@ -66,9 +65,19 @@ function playGame() {
         }
     }
 
-    while (humanScore < 5 || computerScore < 5) {
+    while (humanScore < 5 && computerScore < 5) {
+        getComputerChoice()
+        getHumanChoice()
+
         playRound(humanSelection, computerSelection);
     }
+
+    if (humanScore == 5) {
+        alert(victory);
+    } else if (computerScore == 5) {
+        alert(defeat);
+    }
+
 }
 
 playGame();
