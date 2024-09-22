@@ -28,7 +28,7 @@ function playGame() {
     let computerScore = 0;
 
     function playRound(humanChoice, robotChoice) {
-        let sum = humanChoice + "." + robotChoice;
+        let sum = humanChoice + " vs " + robotChoice;
         console.log(sum);
         let winner = "you win! ";
         let loser = "You lost! ";
@@ -41,19 +41,19 @@ function playGame() {
             if (sum === "scissors.paper") {
                 message = winner + str1;
                 humanScore++
-            } else if (sum === "paper.rock") {
+            } else if (sum === "paper vs rock") {
                 message = winner + str2;
                 humanScore++
-            } else if (sum === "rock.scissors") {
+            } else if (sum === "rock vs scissors") {
                 message = winner + str3;
                 humanScore++
-            } else if (sum === "scissors.rock") {
+            } else if (sum === "scissors vs rock") {
                 message = loser + str3;
                 computerScore++
-            } else if (sum === "paper.scissors") {
+            } else if (sum === "paper vs scissors") {
                 message = loser + str1;
                 computerScore++
-            } else if (sum === "rock.paper") {
+            } else if (sum === "rock vs paper") {
                 message = loser + str2;
                 computerScore++
             } else {
@@ -66,19 +66,11 @@ function playGame() {
         }
     }
 
-    while (humanScore < 5 && computerScore < 5) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
 
         playRound(humanSelection, computerSelection);
-    }
-
-    if (humanScore == 5) {
-        alert(victory);
-    } else if (computerScore == 5) {
-        alert(defeat);
-    }
-
+    
 }
 
 playGame();
