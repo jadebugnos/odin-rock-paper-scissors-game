@@ -2,35 +2,52 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Document</title>
 </head>
 
 <body>
-    <h1>AI</h1>
-    <div id="robot-choices">
-        <div class="robot"><img src="/game-images/rock.png" alt="a cartoonish color blue icon of a rock hand gesture"></div>
-        <div class="robot"><img src="/game-images/paper.png" alt="a cartoonish color blue icon of a paper hand gesture"></div>
-        <div class="robot"><img src="/game-images/scissor.png" alt="a cartoonish color blue icon of a rock hand gesture"></div>
-    </div>
-    <h1>You</h1>
-    <div>
-        <button id="rock" class="buttons" type="button"><img src="/game-images/rock.png" alt="a cartoonish color blue icon of a rock hand gesture"></button>
-        <button id="paper" class="buttons" type="button"><img src="/game-images/paper.png" alt="a cartoonish color blue icon of a paper hand gesture"></button>
-        <button id="scissors" class="buttons" type="button"><img src="/game-images/scissor.png" alt="a cartoonish color blue icon of a rock hand gesture"></button>
-    </div>
-    <p>lets play a game! pick your choice.</p>
+        <header>
+                <h1>Let's Play Rock Paper Scissors!</h1>
+        </header>
+        <div id="robot-choices">
+                <h1 class="players top">AI</h1>
+                <div>
+                        <div class="robot"><img src="/game-images/rock.png"
+                                        alt="a cartoonish color blue icon of a rock hand gesture">
+                        </div>
+                        <div class="robot"><img src="/game-images/paper.png"
+                                        alt="a cartoonish color blue icon of a paper hand gesture">
+                        </div>
+                        <div class="robot"><img src="/game-images/scissor.png"
+                                        alt="a cartoonish color blue icon of a rock hand gesture"></div>
+                </div>
+        </div>
+
+        <p id="versus">VS</p>
+
+        <div id="human-choices">
+                <h1 class="players bottom">You</h1>
+                <div id="button-container">
+                        <button id="rock" class="buttons" type="button"><img src="/game-images/rock.png"
+                                        alt="a cartoonish color blue icon of a rock hand gesture"></button>
+                        <button id="paper" class="buttons" type="button"><img src="/game-images/paper.png"
+                                        alt="a cartoonish color blue icon of a paper hand gesture"></button>
+                        <button id="scissors" class="buttons" type="button"><img src="/game-images/scissor.png"
+                                        alt="a cartoonish color blue icon of a rock hand gesture"></button>
+                </div>
+        </div>
 
 
 
 
 
 
-    <script src="script.js">
+        <script src="script.js">
 
-    </script>
+        </script>
 </body>
 
 </html>

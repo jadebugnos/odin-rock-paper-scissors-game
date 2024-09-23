@@ -12,7 +12,7 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let choice = prompt("Let's play rock paper scissors, type your choice!");
-    
+
     if (!choice) {
         return choice = "unknown";
     } else {
@@ -66,11 +66,11 @@ function playGame() {
         }
     }
 
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
 
-        playRound(humanSelection, computerSelection);
-    
+    playRound(humanSelection, computerSelection);
+
 }
 
-playGame();
+// playGame();
