@@ -10,15 +10,17 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let choice = prompt("Let's play rock paper scissors, type your choice!");
 
-    if (!choice) {
-        return choice = "unknown";
-    } else {
-        return choice.toLowerCase();
-    }
-}
+//commented out incase I'll need need later
+// function getHumanChoice() {
+//     let choice = prompt("Let's play rock paper scissors, type your choice!");
+
+//     if (!choice) {
+//         return choice = "unknown";
+//     } else {
+//         return choice.toLowerCase();
+//     }
+// }
 
 
 function playGame() {
@@ -66,11 +68,32 @@ function playGame() {
         }
     }
 
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
+    // const humanSelection = getHumanChoice();
+    // const computerSelection = getComputerChoice(); to be transferred to eventlisterner later
 
-    playRound(humanSelection, computerSelection);
+    // playRound(humanSelection, computerSelection);
 
 }
 
-// playGame();
+const robotChoice = document.querySelector('#robot-choices');
+const buttons = document.querySelector('#button-container');
+const headerContent = document.querySelector('#content');
+const counter = document.querySelector('#counter');
+
+
+buttons.addEventListener('click', event => {
+    let target = event.target;
+
+    switch (target.id) {
+        case 'rock':
+            console.log('you clicked rock');
+            break;
+        case 'paper':
+            console.log('you clicked paper');
+            break;
+        case 'scissors':
+            console.log('you clicked scissors');
+            break
+    }
+  
+})

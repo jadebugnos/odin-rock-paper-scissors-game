@@ -55,10 +55,13 @@ header p {
     text-align: center;
     margin-bottom: 20px;
     background-color: #FAEBD7;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .players.top {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 #robot-container {
