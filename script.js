@@ -83,19 +83,15 @@ const counter = document.querySelector('#counter');
 
 buttons.addEventListener('click', event => {
     let target = event.target;
-
+    const buttons = document.querySelectorAll(".buttons")
+    
     if (event.target.tagName === 'IMG') target = event.target.parentElement;
-
-    switch (target.id) {
-        case 'rock':
-            console.log('you clicked rock');
-            break;
-        case 'paper':
-            console.log('you clicked paper');
-            break;
-        case 'scissors':
-            console.log('you clicked scissors');
-            break
+    
+    if (target.classList.contains('buttons')) {
+        for (let button of buttons) {
+            if (button !== target) button.style.display = "none";
+        }
     }
-  
 })
+
+
