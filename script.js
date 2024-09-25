@@ -84,6 +84,8 @@ const counter = document.querySelector('#counter');
 buttons.addEventListener('click', event => {
     let target = event.target;
 
+    if (event.target.tagName === 'IMG') target = event.target.parentElement;
+
     switch (target.id) {
         case 'rock':
             console.log('you clicked rock');
