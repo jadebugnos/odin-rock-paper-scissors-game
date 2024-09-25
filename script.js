@@ -2,11 +2,11 @@ function getComputerChoice() {
     let randomNum = Math.floor((Math.random() * 3) + 1);
 
     if (randomNum === 1) {
-        return "rock";
+        return "robot-rock";
     } else if (randomNum === 2) {
-        return "paper";
+        return "robot-paper";
     } else {
-        return "scissors";
+        return "robot-scissors";
     }
 }
 
@@ -80,13 +80,13 @@ const buttons = document.querySelector('#button-container');
 const headerContent = document.querySelector('#content');
 const counter = document.querySelector('#counter');
 
-
+//hides the human buttons but the selected button
 buttons.addEventListener('click', event => {
     let target = event.target;
-    const buttons = document.querySelectorAll(".buttons")
-    
+    const buttons = document.querySelectorAll(".buttons");
+
     if (event.target.tagName === 'IMG') target = event.target.parentElement;
-    
+
     if (target.classList.contains('buttons')) {
         for (let button of buttons) {
             if (button !== target) button.style.display = "none";
@@ -94,4 +94,21 @@ buttons.addEventListener('click', event => {
     }
 })
 
+//the choice here should be passed with getComputerChoice function
+function toHideRobotButtons(choice) {
+    const robots = document.querySelectorAll('.robot');
 
+    for (let robot of robots) {
+        if (robot.id !== choice) {
+            robot.style.display = "none";
+        } else {
+            robot.style.display = "block";
+        }
+    } 
+
+}
+
+
+
+
+toHideRobotButtons(getComputerChoice())
