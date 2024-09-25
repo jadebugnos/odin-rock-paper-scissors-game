@@ -13,50 +13,33 @@ function getComputerChoice() {
 
 function playRound(humanChoice, robotChoice) {
     let sum = humanChoice + " vs " + robotChoice;
-    console.log(sum);
-    let winner = "you win! ";
-    let loser = "You lost! ";
-    let message;
-    let str1 = "scissors beats paper!";
-    let str2 = "paper beats rock";
-    let str3 = "rock beats scissors";
 
-    if (humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors") {
-        if (sum === "scissors.paper") {
-            message = winner + str1;
-            humanScore++
-        } else if (sum === "paper vs rock") {
-            message = winner + str2;
-            humanScore++
-        } else if (sum === "rock vs scissors") {
-            message = winner + str3;
-            humanScore++
-        } else if (sum === "scissors vs rock") {
-            message = loser + str3;
-            computerScore++
-        } else if (sum === "paper vs scissors") {
-            message = loser + str1;
-            computerScore++
-        } else if (sum === "rock vs paper") {
-            message = loser + str2;
-            computerScore++
+    if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
+        if (sum === "scissors vs robot-paper") {
+            return "win";
+        } else if (sum === "paper vs robot-rock") {
+            return "win";
+        } else if (sum === "rock vs robot-scissors") {
+            return "win";
+        } else if (sum === "scissors vs robot-rock") {
+            return "lose";
+        } else if (sum === "paper vs robot-scissors") {
+            return "lose";
+        } else if (sum === "rock vs robot-paper") {
+            return "lose";
         } else {
-            message = "draw! try again";
+            return "draw";
         }
-        console.log(message);
-        console.log(humanScore, computerScore);
-    } else {
-        alert("You can only pick rock, paper and scissors!");
     }
 }
 
-function playGame() {
+
+function playGame(result) {
     let victory = "Congratulations! You won the game! refresh to restart.";
     let defeat = "Game over! you lost the game! refresh to restart.";
+    console.log(result);
 }
 
-// to be transferred to eventlisterner later
-// playRound(humanSelection, computerSelection);
 
 const robotChoice = document.querySelector('#robot-choices');
 const buttons = document.querySelector('#button-container');
@@ -66,18 +49,20 @@ const counter = document.querySelector('#counter');
 //hides the human buttons but the selected button
 buttons.addEventListener('click', event => {
     let target = event.target;
+    if (event.target.tagName === 'IMG') target = event.target.parentElement;
+
     const buttons = document.querySelectorAll(".buttons");
     const computerSelection = getComputerChoice();
-    
+    const humanSelection = target.id;
     toHideRobotButtons(computerSelection);
-
-    if (event.target.tagName === 'IMG') target = event.target.parentElement;
 
     if (target.classList.contains('buttons')) {
         for (let button of buttons) {
             if (button !== target) button.style.display = "none";
         }
     }
+    const result = playRound(humanSelection, computerSelection);
+    playGame(result);
 })
 
 //should be passed with getComputerChoice function
