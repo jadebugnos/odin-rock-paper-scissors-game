@@ -6,7 +6,7 @@ const restartButton = document.querySelector('#restart');
 const headerContent = document.querySelector('#content');
 
 
-restartButton.textContent = "Play Game";
+restartButton.textContent = "Pick One";
 scores.textContent = `Scores: 0${humanScore} || 0${robotScore}`
 
 
@@ -150,7 +150,8 @@ buttons.addEventListener('click', event => {
     const buttons = document.querySelectorAll(".buttons");
     const computerSelection = getComputerChoice();
     const humanSelection = target.id;
-    toHideRobotButtons(computerSelection);
+
+    if (target.classList.contains('buttons')) toHideRobotButtons(computerSelection);
 
     if (target.classList.contains('buttons')) {
         for (let button of buttons) {
@@ -171,7 +172,7 @@ function toHideRobotButtons(choice) {
         if (robot.id !== choice) {
             robot.style.display = "none";
         } else {
-            robot.style.display = "block";
+            robot.style.display = "flex";
         }
     }
 }
@@ -193,5 +194,10 @@ function restart() {
     })
 }
 
+
+
+function loop() {
+
+}
 
 
