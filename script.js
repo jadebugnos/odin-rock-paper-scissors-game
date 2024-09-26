@@ -1,8 +1,10 @@
 const scores = document.querySelector('#counter');
 let humanScore = 0;
 let robotScore = 0;
+const restartButton = document.querySelector('#restart');
+restartButton.textContent = "Play Game";
 
-scores.textContent = `Scores: ${humanScore} VS ${robotScore}`
+scores.textContent = `Scores: 0${humanScore} || 0${robotScore}`
 
 function getComputerChoice() {
     let randomNum = Math.floor((Math.random() * 3) + 1);
@@ -92,25 +94,29 @@ function playGame(result) {
     switch (result) {
         case "win":
             headerContent.textContent = gameMessages.victory[randomInt];
-            humanScore += 1;
+            humanScore++;
+            restart()
             break;
         case "lose":
             headerContent.textContent = gameMessages.defeat[randomInt];
-            robotScore += 1;
+            robotScore++;
+            restart()
             break;
         case "draw":
             headerContent.textContent = gameMessages.draw[randomInt];
+            restart()
             break;
     }
-
-    scores.textContent = `Scores: ${humanScore} VS ${robotScore}`
+    //will update scores
+    scores.textContent = `Scores: 0${humanScore} || 0${robotScore}`;
 }
 
 
 const robotChoice = document.querySelector('#robot-choices');
 const buttons = document.querySelector('#button-container');
 
-//hides the human buttons but the selected button
+
+
 buttons.addEventListener('click', event => {
     let target = event.target;
     if (event.target.tagName === 'IMG') target = event.target.parentElement;
@@ -129,7 +135,7 @@ buttons.addEventListener('click', event => {
     playGame(result);
 })
 
-//should be passed with getComputerChoice function
+
 function toHideRobotButtons(choice) {
     const robots = document.querySelectorAll('.robot');
 
@@ -142,6 +148,18 @@ function toHideRobotButtons(choice) {
     }
 }
 
+function restart() {
+    restartButton.textContent = "Rematch"
+    restartButton.addEventListener('click', event => {
+        target = event.target;
+
+        const btn = document.querySelectorAll('.btn');
+        for (let items of btn) {
+            items.style.display = "flex";
+        }
+        
+    })
+}
 
 
 

@@ -21,7 +21,7 @@ body {
 header {
     position: fixed;
     top: 0;
-    padding: 30px;
+    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,6 +64,14 @@ header p {
     margin-top: 50px;
 }
 
+.players.bottom {
+    background-color: rgb(121, 183, 241);
+    padding: 15px;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: #F0F0F0;
+}
+
 #robot-container {
     display: flex;
     justify-content: space-evenly;
@@ -73,7 +81,7 @@ header p {
 }
 
 #versus {
-    font-size: 50px;
+    font-size: 30px;
     font-weight: 700;
     background-color: #FAEBD7;
     border: 2px solid black;
