@@ -1,10 +1,15 @@
 const scores = document.querySelector('#counter');
 let humanScore = 0;
 let robotScore = 0;
-const restartButton = document.querySelector('#restart');
-restartButton.textContent = "Play Game";
 
+const restartButton = document.querySelector('#restart');
+const headerContent = document.querySelector('#content');
+
+
+restartButton.textContent = "Play Game";
 scores.textContent = `Scores: 0${humanScore} || 0${robotScore}`
+
+
 
 function getComputerChoice() {
     let randomNum = Math.floor((Math.random() * 3) + 1);
@@ -17,6 +22,8 @@ function getComputerChoice() {
         return "robot-scissors";
     }
 }
+
+
 
 
 function playRound(humanChoice, robotChoice) {
@@ -40,6 +47,9 @@ function playRound(humanChoice, robotChoice) {
         }
     }
 }
+
+
+
 
 const gameMessages = {
     victory: [
@@ -79,6 +89,19 @@ const gameMessages = {
         "A perfect tie! Let’s see who claims the next victory!",
         "No clear winner yet! Want to go again?",
         "A draw! Looks like the game is heating up! Rematch?"
+    ],
+
+    choose: [
+        "Choose wisely! Your decision matters!",
+        "Make your move! The game is in your hands!",
+        "It’s your call! Take a deep breath and go for it!",
+        "Time to choose! Which will you pick?",
+        "This is your moment! Choose your next move carefully!",
+        "The next step is yours! What will it be?",
+        "Your choice can change everything! Pick wisely!",
+        "The power is in your hands! Make the call!",
+        "Think carefully! Your choice will shape the outcome!",
+        "It’s decision time! What will you choose?"
     ]
 };
 
@@ -88,8 +111,7 @@ const gameMessages = {
 function playGame(result) {
     let victory = "Congratulations! You won the game! refresh to restart.";
     let defeat = "Game over! you lost the game! refresh to restart.";
-    const headerContent = document.querySelector('#content');
-    randomInt = Math.floor(Math.random() * 10);
+    const randomInt = Math.floor(Math.random() * 10);
 
     switch (result) {
         case "win":
@@ -112,8 +134,12 @@ function playGame(result) {
 }
 
 
+
+
 const robotChoice = document.querySelector('#robot-choices');
 const buttons = document.querySelector('#button-container');
+
+
 
 
 
@@ -136,6 +162,8 @@ buttons.addEventListener('click', event => {
 })
 
 
+
+
 function toHideRobotButtons(choice) {
     const robots = document.querySelectorAll('.robot');
 
@@ -148,16 +176,20 @@ function toHideRobotButtons(choice) {
     }
 }
 
+
+
 function restart() {
     restartButton.textContent = "Rematch"
-    restartButton.addEventListener('click', event => {
-        target = event.target;
+
+    restartButton.addEventListener('click', () => {
+        const randomInt = Math.floor(Math.random() * 10);
+        headerContent.textContent = gameMessages.choose[randomInt];
 
         const btn = document.querySelectorAll('.btn');
         for (let items of btn) {
             items.style.display = "flex";
         }
-        
+
     })
 }
 
