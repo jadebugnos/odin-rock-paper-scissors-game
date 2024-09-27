@@ -6,9 +6,10 @@ const restartButton = document.querySelector('#restart');
 const headerContent = document.querySelector('#content');
 const robotChoice = document.querySelector('#robot-choices');
 const buttons = document.querySelector('#button-container');
+const btn = document.querySelectorAll('.btn');
 
 
-restartButton.textContent = "Pick One";
+restartButton.textContent = "Pick Your Choice";
 scores.textContent = `Scores: ${humanScore} || ${robotScore}`
 
 
@@ -53,16 +54,16 @@ function playRound(humanChoice, robotChoice) {
 
 const gameMessages = {
     victory: [
-        "You’ve conquered this round! Ready for more?",
-        "Victory is yours! Want to play again?",
-        "Well done, champion! Another round?",
-        "You came out on top! Feel like going again?",
-        "A flawless win! Up for another challenge?",
-        "You’ve mastered this match! Ready for the next?",
-        "Impressive! You’ve claimed victory! Play again?",
-        "You’ve outplayed your opponent! Care for a rematch?",
-        "Congratulations, you’ve won! Let’s see if you can do it again!",
-        "You’re unbeatable! Shall we go for another round?"
+        "You’ve conquered this round! Ready for the next challenge?",
+        "Well done! You’ve won this match! Want to keep playing?",
+        "Great job! You’ve outsmarted your opponent this time! Another round?",
+        "You came out on top! Feel like trying again?",
+        "A fantastic win! Keep the momentum going! Up for another?",
+        "You’ve mastered this round! What’s your next move?",
+        "Impressive! You’ve claimed victory here! Want a rematch?",
+        "Nice work! You’ve bested the competition! Care for another round?",
+        "Congratulations on this win! Let’s see if you can do it again!",
+        "You’re on fire! Shall we jump into another round?"
     ],
 
     defeat: [
@@ -102,33 +103,66 @@ const gameMessages = {
         "The power is in your hands! Make the call!",
         "Think carefully! Your choice will shape the outcome!",
         "It’s decision time! What will you choose?"
+    ],
+
+    win: [
+        "Congratulations! You’ve won the game! Ready for a new challenge?",
+        "You’re a champion! Would you like to play again?",
+        "Fantastic! You’ve conquered the entire game! Want to go for another match?",
+        "You did it! Victory is yours! Shall we play another game?",
+        "A well-deserved win! How about one more challenge?",
+        "Great job! You’ve outplayed everyone! Want to challenge yourself again?",
+        "You’ve mastered this game! Are you ready for a rematch?",
+        "Victory! You’ve shown your skills! Let’s see if you can do it again!",
+        "Bravo! You’ve triumphed in the game! Shall we play once more?",
+        "You’ve clinched the win! How about another game to test your skills?"
+    ],
+
+    lose: [
+        "Game over! Don’t lose hope, try again!",
+        "You were close! Better luck next time!",
+        "Not this time! But you can come back stronger!",
+        "Defeat stings, but you’ll bounce back!",
+        "Keep your head up! Every loss is a lesson!",
+        "You fought hard, but the game slipped away!",
+        "Close call! You’ve got this next time!",
+        "Don’t worry! You’ll get your chance again!",
+        "Almost there! Just a bit more practice needed!",
+        "You’ll turn this around! Stay determined!"
     ]
 };
 
 
 function playGame(result) {
-    let victory = "Congratulations! You won the game! refresh to restart.";
-    let defeat = "Game over! you lost the game! refresh to restart.";
     const randomInt = Math.floor(Math.random() * 10);
 
-    switch (result) {
-        case "win":
-            headerContent.textContent = gameMessages.victory[randomInt];
-            humanScore++;
-            restart()
-            break;
-        case "lose":
-            headerContent.textContent = gameMessages.defeat[randomInt];
-            robotScore++;
-            restart(result)
-            break;
-        case "draw":
-            headerContent.textContent = gameMessages.draw[randomInt];
-            restart(result)
-            break;
+    if (humanScore < 5 || robotScore < 5) {
+        switch (result) {
+            case "win":
+                headerContent.textContent = gameMessages.victory[randomInt];
+                humanScore++;
+                restart()
+                break;
+            case "lose":
+                headerContent.textContent = gameMessages.defeat[randomInt];
+                robotScore++;
+                restart(result)
+                break;
+            case "draw":
+                headerContent.textContent = gameMessages.draw[randomInt];
+                restart(result)
+                break;
+        }
     }
+
     //will update scores
     scores.textContent = `Scores: ${humanScore} || ${robotScore}`;
+
+    if (humanScore === 5) {
+        endGame("win");
+    } else if (robotScore === 5) {
+        endGame("lose");
+    }
 }
 
 
@@ -177,11 +211,9 @@ function restart(result) {
 
     //to handle multiple stacking of eventlisteners
     const handleRestart = () => {
+        GameActive = true;
         const randomInt = Math.floor(Math.random() * 10);
         headerContent.textContent = gameMessages.choose[randomInt];
-
-        const btn = document.querySelectorAll('.btn');
-        GameActive = true;
 
         for (let items of btn) {
             items.style.display = "flex";
@@ -193,9 +225,25 @@ function restart(result) {
     restartButton.addEventListener('click', handleRestart);
 };
 
+function endGame(result) {
+    const randomInt = Math.floor(Math.random() * 10);
+    (result === "win") ? headerContent.textContent = gameMessages.win[randomInt] :
+        headerContent.textContent = gameMessages.lose[randomInt];
 
-function loop() {
+    restartButton.textContent = "Play Again";
+    restartButton.style.backgroundColor = "green";
 
+    const reset = () => {
+        restartButton.style.backgroundColor = "rgb(121, 183, 241)";
+        restartButton.textContent = "Pick Your Choice";
+        humanScore = 0;
+        robotScore = 0;
+        scores.textContent = `Scores: ${humanScore} || ${robotScore}`;
+        for (let items of btn) {
+            items.style.display = "flex";
+        }
+        restartButton.removeEventListener('click', reset);
+    }
+
+    restartButton.addEventListener('click', reset);
 }
-
-
