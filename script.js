@@ -4,10 +4,12 @@ let robotScore = 0;
 
 const restartButton = document.querySelector('#restart');
 const headerContent = document.querySelector('#content');
+const robotChoice = document.querySelector('#robot-choices');
+const buttons = document.querySelector('#button-container');
 
 
 restartButton.textContent = "Pick One";
-scores.textContent = `Scores: 0${humanScore} || 0${robotScore}`
+scores.textContent = `Scores: ${humanScore} || ${robotScore}`
 
 
 
@@ -27,28 +29,26 @@ function getComputerChoice() {
 
 
 function playRound(humanChoice, robotChoice) {
-    let sum = humanChoice + " vs " + robotChoice;
+    let matchUp = humanChoice + " vs " + robotChoice;
 
     if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-        if (sum === "scissors vs robot-paper") {
+        if (matchUp === "scissors vs robot-paper") {
             return "win";
-        } else if (sum === "paper vs robot-rock") {
+        } else if (matchUp === "paper vs robot-rock") {
             return "win";
-        } else if (sum === "rock vs robot-scissors") {
+        } else if (matchUp === "rock vs robot-scissors") {
             return "win";
-        } else if (sum === "scissors vs robot-rock") {
+        } else if (matchUp === "scissors vs robot-rock") {
             return "lose";
-        } else if (sum === "paper vs robot-scissors") {
+        } else if (matchUp === "paper vs robot-scissors") {
             return "lose";
-        } else if (sum === "rock vs robot-paper") {
+        } else if (matchUp === "rock vs robot-paper") {
             return "lose";
         } else {
             return "draw";
         }
     }
 }
-
-
 
 
 const gameMessages = {
@@ -106,8 +106,6 @@ const gameMessages = {
 };
 
 
-
-
 function playGame(result) {
     let victory = "Congratulations! You won the game! refresh to restart.";
     let defeat = "Game over! you lost the game! refresh to restart.";
@@ -122,28 +120,23 @@ function playGame(result) {
         case "lose":
             headerContent.textContent = gameMessages.defeat[randomInt];
             robotScore++;
-            restart()
+            restart(result)
             break;
         case "draw":
             headerContent.textContent = gameMessages.draw[randomInt];
-            restart()
+            restart(result)
             break;
     }
     //will update scores
-    scores.textContent = `Scores: 0${humanScore} || 0${robotScore}`;
+    scores.textContent = `Scores: ${humanScore} || ${robotScore}`;
 }
 
 
+let GameActive = true;
 
+function handleButtonChoices(event) {
+    if (!GameActive) return;
 
-const robotChoice = document.querySelector('#robot-choices');
-const buttons = document.querySelector('#button-container');
-
-
-
-
-
-buttons.addEventListener('click', event => {
     let target = event.target;
     if (event.target.tagName === 'IMG') target = event.target.parentElement;
 
@@ -151,18 +144,19 @@ buttons.addEventListener('click', event => {
     const computerSelection = getComputerChoice();
     const humanSelection = target.id;
 
-    if (target.classList.contains('buttons')) toHideRobotButtons(computerSelection);
-
     if (target.classList.contains('buttons')) {
+        toHideRobotButtons(computerSelection);
         for (let button of buttons) {
             if (button !== target) button.style.display = "none";
         }
     }
     const result = playRound(humanSelection, computerSelection);
     playGame(result);
-})
 
+    GameActive = false;
+}
 
+buttons.addEventListener('click', handleButtonChoices);
 
 
 function toHideRobotButtons(choice) {
@@ -178,22 +172,26 @@ function toHideRobotButtons(choice) {
 }
 
 
-
-function restart() {
+function restart(result) {
     restartButton.textContent = "Rematch"
 
-    restartButton.addEventListener('click', () => {
+    //to handle multiple stacking of eventlisteners
+    const handleRestart = () => {
         const randomInt = Math.floor(Math.random() * 10);
         headerContent.textContent = gameMessages.choose[randomInt];
 
         const btn = document.querySelectorAll('.btn');
+        GameActive = true;
+
         for (let items of btn) {
             items.style.display = "flex";
         }
 
-    })
-}
+        restartButton.removeEventListener('click', handleRestart);
+    }
 
+    restartButton.addEventListener('click', handleRestart);
+};
 
 
 function loop() {
